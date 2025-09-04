@@ -7,10 +7,12 @@ class Overlay(QtWidgets.QWidget):
     valid_swaps = None
     roi = None
     app = None
+    close_flag = False
 
     def __init__(self, cell_size=90, roi=(135, 225)):
         self.app = QtWidgets.QApplication(sys.argv)
         super().__init__()
+        self.init_ui()
 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint | 
                             QtCore.Qt.WindowStaysOnTopHint | 
@@ -23,9 +25,20 @@ class Overlay(QtWidgets.QWidget):
         self.cell_size = cell_size
         self.roi = roi
         self.show()
-        
+
+    def init_ui(self):
+        close_button = QtWidgets.QPushButton("X", self)
+        close_button.setGeometry(30, 30, 30, 30)
+        close_button.clicked.connect(self.close_program)
+        layout = QtWidgets.QVBoxLayout(self)
+        layout.addStretch()
+        layout.addWidget(close_button)
+        self.setLayout(layout)
+
+    def close_program(self):
+        self.close_flag = True
     
-    def update(self, valid_swaps):
+    def update_frame(self, valid_swaps):
         self.valid_swaps = valid_swaps
 
     def paintEvent(self, event):
