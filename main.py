@@ -14,7 +14,7 @@ os.chdir(PATH)
 # wincap = WindowCapture(window_name='Dota 2')
 # wincap = WindowCapture(window_name='1920x1080.jpg')
 classificator = Classificator(os.path.join(PATH, 'needle imgs'))
-overlay = Overlay(90)
+# overlay = Overlay(90)
 
 while True:
     # Временное чтение картинки вместо экрана
@@ -28,11 +28,11 @@ while True:
     solver = Solver(classes)
     matches, swaps = solver.look_for_solvation()
 
-    overlay.update(matches)
+    # overlay.update(matches)
 
     cv.imshow('Computer Vision', cropped_frame)
 
     if cv.waitKey(1) == ord('q'):
         cv.destroyAllWindows()
-        overlay.close()
+        # overlay.close()
         break
