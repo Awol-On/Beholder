@@ -1,6 +1,5 @@
-**/__pycache__/
-object_detection
-1920x1080.jpg
-1.jpg
-2.jpg
-3.jpg
+__pycache__/
+object_detection.py
+1.*
+2.*
+3.*
