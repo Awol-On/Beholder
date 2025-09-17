@@ -5,6 +5,7 @@ from window_capture import WindowCapture
 from classification import Classificator
 from solving import Solver
 from overlay import Overlay
+from PyQt5 import QtWidgets
 import sys
 
 PATH = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +14,7 @@ os.chdir(PATH)
 
 wincap = WindowCapture(window_name='Dota 2')
 classificator = Classificator(os.path.join(PATH, 'needle imgs'))
+app = QtWidgets.QApplication(sys.argv)
 overlay = Overlay(90)
 
 while True:
@@ -24,12 +26,12 @@ while True:
     solver = Solver(classes)
     matches, swaps = solver.look_for_solvation()
 
-    overlay.update_frame(matches)
+    overlay.update_frame(swaps)
     overlay.update()
 
+    QtWidgets.QApplication.processEvents()
+
     if overlay.close_flag:
+        print(classes)
+        print(swaps)
         break
-    # if cv.waitKey(1) == ord('q'):
-    #     cv.destroyAllWindows()
-    #     overlay.close()
-    #     break
